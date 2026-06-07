@@ -33,3 +33,15 @@ end, { desc = "copy absolute path", remap = true })
 map({ "n", "v" }, "<leader>fm", function()
   LazyVim.format({ force = true })
 end, { desc = "format" })
+
+map("n", "<leader>cy", function()
+  local line = vim.api.nvim_win_get_cursor(0)[1]
+  local diagnostics = vim.diagnostic.get(0, { lnum = line - 1 })
+  if #diagnostics > 0 then
+    local msg = diagnostics[1].message
+    vim.fn.setreg("+", msg)
+    vim.notify("Copied diagnostic to clipboard: " .. msg)
+  else
+    vim.notify("No diagnostics on current line", vim.log.levels.WARN)
+  end
+end, { desc = "copy diagnostic to clipboard" })

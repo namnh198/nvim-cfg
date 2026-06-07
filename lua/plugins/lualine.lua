@@ -39,18 +39,6 @@ return {
         end
       end
 
-      local function highlight()
-        local mode = vim.fn.mode()
-        if mode == "C" then
-          return { fg = palette.flamingo, bg = "none", gui = "bold" }
-        elseif mode == "V" then
-          return { fg = palette.red, bg = "none", gui = "bold" }
-        elseif mode == "I" then
-          return { fg = palette.green, bg = "none", gui = "bold" }
-        else
-          return { fg = palette.blue, bg = "none", gui = "bold" }
-        end
-      end
       opts.sections.lualine_a = {
         {
           "mode",
@@ -128,7 +116,7 @@ return {
       opts.sections.lualine_z = {
         {
           "filetype",
-          colored = false,
+          colored = true,
           color = { fg = palette.blue, bg = "none", gui = "bold" },
           padding = { left = 0, right = 1 },
         },
